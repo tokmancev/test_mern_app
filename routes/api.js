@@ -4,13 +4,13 @@ const Todo = require('../models/todo');
 
 router.get('/todos', (req, res, next) => {
     //this will return all the data, exposing only the id and action field to the client
-    Todo.find({}, ['studentId', , 'pathToReport'])
+    Todo.find({}, ['studentId', 'recommendation'])
         .then(data => res.json(data))
         .catch(next)
 });
 
 router.post('/todos', (req, res, next) => {
-    if(req.body.action){
+    if(req.body.studentId){
         Todo.create(req.body)
             .then(data => res.json(data))
             .catch(next)

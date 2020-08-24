@@ -6,18 +6,22 @@ class Input extends Component {
 
     state = {
         studentId: "",
-        text: ""
+        recommendation: ""
     }
 
     addTodo = () => {
-        const newId = {action: "action", studentId: this.state.studentId, pathToReport: "test.pdf"}
+        const newId = {
+            studentId: this.state.studentId,
+            pathToReport: "test.pdf",
+            recommendation: this.state.recommendation
+        }
 
         if(newId.studentId && newId.studentId.length > 0){
             axios.post('/api/todos', newId)
                 .then(res => {
                     if(res.data){
                         this.props.getTodos();
-                        this.setState({studentId: ""})
+                        this.setState({studentId: "", recommendation: ""})
                     }
                 })
                 .catch(err => console.log(err))
@@ -32,7 +36,17 @@ class Input extends Component {
         })
     }
 
-
+    showFile = async (e) => {
+        e.preventDefault()
+        const reader = new FileReader()
+        reader.onload = async (e) => {
+            const text = (e.target.result)
+            this.setState({
+                recommendation: text
+            })
+        };
+        reader.readAsText(e.target.files[0])
+    }
 
     render() {
         let { newId } = this.state;
@@ -40,9 +54,10 @@ class Input extends Component {
             <div>
                 <input type="text" onChange={this.handleChange} value={newId} />
                 <button onClick={this.addTodo}>add new Id</button>
+
+                <input type="file" onChange={(e) => this.showFile(e)} />
             </div>
         )
     }
 }
-
 export default Input

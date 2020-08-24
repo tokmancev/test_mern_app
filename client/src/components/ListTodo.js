@@ -1,10 +1,4 @@
-import React, { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-import sample from './sample.pdf';
-
-//https://github.com/wojtekmaj/react-pdf#standard-browserify-and-others
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-//<Document  file={sample} />
+import React from 'react';
 
 const ListTodo = ({ todos, editReport}) => {
     return (
@@ -17,7 +11,7 @@ const ListTodo = ({ todos, editReport}) => {
                             return (
                                 <li key={todo._id} onClick={() => editReport(todo._id)}>
                                     <h2> {todo.studentId} </h2>
-                                    {todo.text}
+                                    <small> {todo.recommendation} </small>
                                 </li>
                             )
                         })

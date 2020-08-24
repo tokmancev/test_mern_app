@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 
 //create schema for todo
 const TodoSchema = new Schema({
-    action: {
-        type: String,
-        required: [true, 'The todo text field is required']
-    },
-    studentId: {
+        studentId: {
         type: String,
         required: [true, 'The id field is required']
     },
     pathToReport: {
+        type: String,
+        required: [false]
+    },
+    recommendation: {
         type: String,
         required: [false]
     }

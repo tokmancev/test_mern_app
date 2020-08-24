@@ -19,11 +19,7 @@ class Todo extends Component {
             .then(res => {
                 if(res.data){
                     this.setState({
-                        todos: res.data.map(
-                            async el => {
-                                const text = await this.getText("recomendation.txt");
-                                Object.assign({}, el, {text: "Hi!"});
-                            })
+                        todos: res.data
                     })
                 }
             })
@@ -38,20 +34,6 @@ class Todo extends Component {
                 }
             })
             .catch(err => console.log(err))
-    }
-
-    getText = async (source, dest) =>
-    {
-        const file = new File(source);
-        const reader = new FileReader()
-        reader.onload = async (e) => {
-            const text = (e.target.result)
-            console.log(text)
-            alert(text)
-
-            dest = text;
-        };
-        reader.readAsText(file);
     }
 
     render() {
