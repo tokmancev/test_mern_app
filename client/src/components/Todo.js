@@ -19,7 +19,11 @@ class Todo extends Component {
             .then(res => {
                 if(res.data){
                     this.setState({
-                        todos: res.data
+                        todos: res.data.map(
+                            async el => {
+                                const text = await this.getText("recomendation.txt");
+                                Object.assign({}, el, {text: "Hi!"});
+                            })
                     })
                 }
             })
@@ -27,7 +31,6 @@ class Todo extends Component {
     }
 
     deleteTodo = (id) => {
-
         axios.delete(`/api/todos/${id}`)
             .then(res => {
                 if(res.data){
@@ -37,14 +40,28 @@ class Todo extends Component {
             .catch(err => console.log(err))
     }
 
+    getText = async (source, dest) =>
+    {
+        const file = new File(source);
+        const reader = new FileReader()
+        reader.onload = async (e) => {
+            const text = (e.target.result)
+            console.log(text)
+            alert(text)
+
+            dest = text;
+        };
+        reader.readAsText(file);
+    }
+
     render() {
         let { todos } = this.state;
 
         return(
             <div>
-                <h1>My Todo(s)</h1>
+                <h1>Reports</h1>
                 <Input getTodos={this.getTodos}/>
-                <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
+                <ListTodo todos={todos} editReport={this.deleteTodo} />
             </div>
         )
     }

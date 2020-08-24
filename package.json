@@ -1,18 +1,23 @@
 {
   "name": "test_mern_app",
   "version": "1.0.0",
-  "description": "",
+  "description": "building todo app using mongodb, express, react and nodejs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "start-watch": "nodemon index.js",
+    "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ojini Jude",
+  "license": "MIT",
   "dependencies": {
-    "devenv": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.26"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
   }
 }
