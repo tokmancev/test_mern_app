@@ -11,20 +11,33 @@ class Input extends Component {
 
     addTodo = () => {
         const newId = {
+            selectedId: this.props.selectedId,
             studentId: this.state.studentId,
             pathToReport: "test.pdf",
             recommendation: this.state.recommendation
         }
 
         if(newId.studentId && newId.studentId.length > 0){
-            axios.post('/api/todos', newId)
-                .then(res => {
-                    if(res.data){
-                        this.props.getTodos();
-                        this.setState({studentId: "", recommendation: ""})
-                    }
-                })
-                .catch(err => console.log(err))
+            if(this.props.selectedId && this.props.selectedId > 0){
+                axios.put('/api/todos', newId)
+                    .then(res => {
+                        if (res.data) {
+                            this.props.getTodos();
+                            this.setState({studentId: "", recommendation: ""})
+                        }
+                    })
+                    .catch(err => console.log(err))
+            }
+            else {
+                axios.post('/api/todos', newId)
+                    .then(res => {
+                        if (res.data) {
+                            this.props.getTodos();
+                            this.setState({studentId: "", recommendation: ""})
+                        }
+                    })
+                    .catch(err => console.log(err))
+            }
         }else {
             console.log('input field required')
         }
@@ -55,7 +68,8 @@ class Input extends Component {
                 <input type="text" onChange={this.handleChange} value={newId} />
                 <button onClick={this.addTodo}>add new Id</button>
 
-                <input type="file" onChange={(e) => this.showFile(e)} />
+                <input type="file" onChange={(e) => this.showFile(e)} accept="text/plain
+"/>
             </div>
         )
     }

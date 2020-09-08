@@ -7,7 +7,8 @@ import ListTodo from './ListTodo';
 class Todo extends Component {
 
     state = {
-        todos: []
+        todos: [],
+        selectedId: ""
     }
 
     componentDidMount(){
@@ -26,14 +27,10 @@ class Todo extends Component {
             .catch(err => console.log(err))
     }
 
-    deleteTodo = (id) => {
-        axios.delete(`/api/todos/${id}`)
-            .then(res => {
-                if(res.data){
-                    this.getTodos()
-                }
-            })
-            .catch(err => console.log(err))
+    editReport = (id) => {
+        this.setState({
+            selectedId: id
+        })
     }
 
     render() {
@@ -42,8 +39,8 @@ class Todo extends Component {
         return(
             <div>
                 <h1>Reports</h1>
-                <Input getTodos={this.getTodos}/>
-                <ListTodo todos={todos} editReport={this.deleteTodo} />
+                <Input getTodos={this.getTodos} selectedId={this.state.selectedId}/>
+                <ListTodo todos={todos} editReport={this.editReport} />
             </div>
         )
     }

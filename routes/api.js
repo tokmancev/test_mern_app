@@ -21,10 +21,21 @@ router.post('/todos', (req, res, next) => {
     }
 });
 
-router.delete('/todos/:id', (req, res, next) => {
-    Todo.findOneAndDelete({"_id": req.params.id})
-        .then(data => res.json(data))
-        .catch(next)
+router.put('/todos', (req, res, next) => {
+    console.log(req.body.selectedId);
+    console.log(req.body);
+    if(req.body.studentId){
+        Todo.findByIdAndUpdate(
+            req.body.selectedId,
+            req.body,
+            {new: true})
+            .then(data => res.json(data))
+            .catch(next)
+    }else {
+        res.json({
+            error: "The input field is empty"
+        })
+    }
 })
 
 module.exports = router;
