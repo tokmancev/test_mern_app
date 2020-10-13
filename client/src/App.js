@@ -14,12 +14,20 @@ const App = () => {
               <div className="navbar-nav mr-auto">
                   <li className="nav-item">
                       <Link to={"/reports"} className="nav-link">
+<<<<<<< HEAD
                           Отчеты по проектам
+=======
+                          Reports
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                       </Link>
                   </li>
                   <li className="nav-item">
                       <Link to={"/add"} className="nav-link">
+<<<<<<< HEAD
                           Добавить отчет
+=======
+                          Add
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                       </Link>
                   </li>
               </div>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //https://bezkoder.com/react-crud-web-api/
 //https://levelup.gitconnected.com/displaying-pdf-in-react-app-6e9d1fffa1a9
 
@@ -11,11 +12,19 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 class Report extends Component {
 
 
+=======
+import React, { Component } from "react";
+import axios from "axios";
+
+
+class Report extends Component {
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
     state = {
         currentReport: {
             id: null,
             studentId: "",
             recommendation: ""
+<<<<<<< HEAD
         },
         numPages: null,
         pageNumber : 1 //setting 1 to show fisrt page
@@ -42,6 +51,11 @@ class Report extends Component {
     }
 
 
+=======
+        }
+    };
+
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
     componentDidMount() {
         axios.get('/api/reports/'+ this.props.match.params.id)
             .then(res => {
@@ -55,6 +69,7 @@ class Report extends Component {
 
     updatePublished = (status) => {
         const data = {
+<<<<<<< HEAD
             id: this.state.currentReport.id,
             description: this.state.currentReport.recommendation,
             published: status
@@ -65,6 +80,19 @@ class Report extends Component {
                 this.setState(prevState => ({
                     currentReport: {
                         ...prevState.currentReport,
+=======
+            id: this.state.currentTutorial.id,
+            title: this.state.currentTutorial.title,
+            description: this.state.currentTutorial.description,
+            published: status
+        };
+
+        axios.put(this.state.currentTutorial.id, data)
+            .then(response => {
+                this.setState(prevState => ({
+                    currentTutorial: {
+                        ...prevState.currentTutorial,
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                         published: status
                     }
                 }));
@@ -83,7 +111,11 @@ class Report extends Component {
             .then(response => {
                 console.log(response.data);
                 this.setState({
+<<<<<<< HEAD
                     message: "Отчет успешно обновлен!"
+=======
+                    message: "The tutorial was updated successfully!"
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                 });
             })
             .catch(e => {
@@ -103,12 +135,21 @@ class Report extends Component {
     }
 
     onChangeDescription = (e) => {
+<<<<<<< HEAD
         const recommendation = e.target.value;
 
         this.setState(prevState => ({
             currentReport: {
                 ...prevState.currentReport,
                 recommendation: recommendation
+=======
+        const description = e.target.value;
+
+        this.setState(prevState => ({
+            currentTutorial: {
+                ...prevState.currentReport,
+                description: description
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
             }
         }));
     }
@@ -131,6 +172,7 @@ class Report extends Component {
 
         return (
             <div>
+<<<<<<< HEAD
                 <Document file={sample} onLoadSuccess={this.onDocumentLoadSuccess}>
                     <Page pageNumber={this.state.pageNumber} />
                 </Document>
@@ -165,6 +207,17 @@ class Report extends Component {
                         <form id="report_edit_form">
                             <div className="form-group">
                                 <label htmlFor="title">Студент</label>
+=======
+                {currentReport ? (
+                    <div className="edit-form">
+                        <h4>Tutorial</h4>
+
+                        <small> {currentReport.recommendation} </small>
+
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="title">Title</label>
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                                 <input
                                     type="text"
                                     className="form-control"
@@ -174,7 +227,11 @@ class Report extends Component {
                                 />
                             </div>
                             <div className="form-group">
+<<<<<<< HEAD
                                 <label htmlFor="description">Описание</label>
+=======
+                                <label htmlFor="description">Description</label>
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                                 <input
                                     type="text"
                                     className="form-control"
@@ -186,6 +243,7 @@ class Report extends Component {
 
                             <div className="form-group">
                                 <label>
+<<<<<<< HEAD
                                     <strong>Статус:</strong>
                                 </label>
                                 {currentReport.published ? "Опубликован" : "Ожидает"}
@@ -202,6 +260,11 @@ class Report extends Component {
                                     onChange={this.onChangeDescription}
                                 >
                                 </textarea></p>
+=======
+                                    <strong>Status:</strong>
+                                </label>
+                                {currentReport.published ? "Published" : "Pending"}
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                             </div>
                         </form>
 
@@ -210,14 +273,22 @@ class Report extends Component {
                                 className="badge badge-primary mr-2"
                                 onClick={() => this.updatePublished(false)}
                             >
+<<<<<<< HEAD
                                 Неопубликовано
+=======
+                                UnPublish
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                             </button>
                         ) : (
                             <button
                                 className="badge badge-primary mr-2"
                                 onClick={() => this.updatePublished(true)}
                             >
+<<<<<<< HEAD
                                 Публиковать
+=======
+                                Publish
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                             </button>
                         )}
 
@@ -225,7 +296,11 @@ class Report extends Component {
                             className="badge badge-danger mr-2"
                             onClick={this.deleteTutorial}
                         >
+<<<<<<< HEAD
                             Удалить
+=======
+                            Delete
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                         </button>
 
                         <button
@@ -233,14 +308,22 @@ class Report extends Component {
                             className="badge badge-success"
                             onClick={this.updateTutorial}
                         >
+<<<<<<< HEAD
                             Обновить
+=======
+                            Update
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                         </button>
                         <p>{this.state.message}</p>
                     </div>
                 ) : (
                     <div>
                         <br />
+<<<<<<< HEAD
                         <p>Выберите отчет...</p>
+=======
+                        <p>Please click on a Tutorial...</p>
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
                     </div>
                 )}
             </div>
@@ -248,6 +331,10 @@ class Report extends Component {
     }
 }
 
+<<<<<<< HEAD
 export default Report
 
 //<Document file={sample} onLoadError={(error) => alert('Error while loading document! ' + error.message)} onLoadSuccess={(pdf) => alert('Loaded a file with ' + pdf.numPages + ' pages!')}/>;
+=======
+export default Report
+>>>>>>> 80be9ad7ad77aa9f7c1a839a010bd09fadfc7ccd
